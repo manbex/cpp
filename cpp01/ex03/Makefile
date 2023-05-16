@@ -6,27 +6,33 @@
 #    By: mbenicho <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 09:19:04 by mbenicho          #+#    #+#              #
-#    Updated: 2023/04/22 15:44:00 by mbenicho         ###   ########.fr        #
+#    Updated: 2023/04/17 16:12:36 by mbenicho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	useless_violence
 
-INC			=	Weapon.hpp	\
-				HumanA.hpp	\
-				HumanB.hpp
-SRC 		=	main.cpp	\
-				Weapon.cpp	\
-				HumanA.cpp	\
-				HumanB.cpp
+INC_DIR		=	includes/
+SRC_DIR		=	srcs/
+OBJ_DIR		=	obj/
 
-OBJ			=	$(SRC:.cpp=.o)
+INC			=	HumanA.hpp		\
+				HumanB.hpp		\
+				Weapon.hpp
+SRC 		=	main.cpp 		\
+				HumanA.cpp		\
+				HumanB.cpp		\
+				Weapon.cpp
+
+
+OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
 CC			=	c++
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CFLAGS		=	-I$(INC_DIR) -Wall -Wextra -Werror -std=c++98
 RM			=	rm -f
 
-%.o:	%.cpp $(INC)
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp $(addprefix $(INC_DIR), $(INC))
+					@mkdir -p $(@D)
 					$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):		$(OBJ)
@@ -35,7 +41,7 @@ $(NAME):		$(OBJ)
 all:			$(NAME)
 
 clean:
-					$(RM) -r $(OBJ)
+					$(RM) -r $(OBJ_DIR)
 
 fclean:			clean
 					$(RM) $(NAME)

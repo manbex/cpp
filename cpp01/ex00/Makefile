@@ -12,18 +12,22 @@
 
 NAME		=	zombie
 
-INC			=	Zombie.hpp
+INC_DIR		=	includes/
+SRC_DIR		=	srcs/
+OBJ_DIR		=	obj/
 
+INC			=	Zombie.hpp
 SRC 		=	main.cpp 		\
 				Zombie.cpp
 
-OBJ			=	$(SRC:.cpp=.o)
+OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
 CC			=	c++
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CFLAGS		=	-I$(INC_DIR) -Wall -Wextra -Werror -std=c++98
 RM			=	rm -f
 
-%.o:	%.cpp $(INC)
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp $(addprefix $(INC_DIR), $(INC))
+					@mkdir -p $(@D)
 					$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):		$(OBJ)
@@ -32,7 +36,7 @@ $(NAME):		$(OBJ)
 all:			$(NAME)
 
 clean:
-					$(RM) -r $(OBJ)
+					$(RM) -r $(OBJ_DIR)
 
 fclean:			clean
 					$(RM) $(NAME)

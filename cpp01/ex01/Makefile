@@ -6,25 +6,29 @@
 #    By: mbenicho <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 09:19:04 by mbenicho          #+#    #+#              #
-#    Updated: 2023/04/17 16:21:48 by mbenicho         ###   ########.fr        #
+#    Updated: 2023/04/17 16:12:36 by mbenicho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	zombie
 
-INC			=	Zombie.hpp
+INC_DIR		=	includes/
+SRC_DIR		=	srcs/
+OBJ_DIR		=	obj/
 
+INC			=	Zombie.hpp
 SRC 		=	main.cpp 		\
 				Zombie.cpp		\
 				zombieHorde.cpp
 
-OBJ			=	$(SRC:.cpp=.o)
+OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
 CC			=	c++
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CFLAGS		=	-I$(INC_DIR) -Wall -Wextra -Werror -std=c++98
 RM			=	rm -f
 
-%.o:	%.cpp $(INC)
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp $(addprefix $(INC_DIR), $(INC))
+					@mkdir -p $(@D)
 					$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):		$(OBJ)
@@ -33,7 +37,7 @@ $(NAME):		$(OBJ)
 all:			$(NAME)
 
 clean:
-					$(RM) -r $(OBJ)
+					$(RM) -r $(OBJ_DIR)
 
 fclean:			clean
 					$(RM) $(NAME)
