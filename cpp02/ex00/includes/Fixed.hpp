@@ -7,7 +7,7 @@ class	Fixed
 {
 	public:
 		Fixed();
-		Fixed(Fixed &);
+		Fixed(Fixed const &);
 		Fixed &operator=(Fixed const &cpy);
 		~Fixed();
 
