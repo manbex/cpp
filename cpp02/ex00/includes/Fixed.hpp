@@ -8,7 +8,7 @@ class	Fixed
 	public:
 		Fixed();
 		Fixed(Fixed const &);
-		Fixed &operator=(Fixed const &cpy);
+		Fixed &operator=(Fixed const &);
 		~Fixed();
 
 		int		getRawBits() const;
@@ -16,7 +16,7 @@ class	Fixed
 
 	private:
 		int					_value;
-		static int const	_bits;
+		static int const	_bits = 8;
 };
 
 #endif
