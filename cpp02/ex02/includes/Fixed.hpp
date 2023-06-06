@@ -12,16 +12,16 @@ class	Fixed
 		Fixed(int const n);
 		Fixed(float const n);
 		Fixed &operator=(Fixed const &cpy);
-		Fixed operator+(Fixed const &fixed);
-		Fixed operator-(Fixed const &fixed);
-		Fixed operator*(Fixed const &fixed);
-		Fixed operator/(Fixed const &fixed);
-		bool operator>(Fixed const &fixed);
-		bool operator<(Fixed const &fixed);
-		bool operator>=(Fixed const &fixed);
-		bool operator<=(Fixed const &fixed);
-		bool operator==(Fixed const &fixed);
-		bool operator!=(Fixed const &fixed);
+		Fixed operator+(Fixed const &fixed) const;
+		Fixed operator-(Fixed const &fixed) const;
+		Fixed operator*(Fixed const &fixed) const;
+		Fixed operator/(Fixed const &fixed) const;
+		bool operator>(Fixed const &fixed) const;
+		bool operator<(Fixed const &fixed) const;
+		bool operator>=(Fixed const &fixed) const;
+		bool operator<=(Fixed const &fixed) const;
+		bool operator==(Fixed const &fixed) const;
+		bool operator!=(Fixed const &fixed) const;
 		Fixed operator++();
 		Fixed operator++(int);
 		Fixed operator--();
@@ -32,6 +32,11 @@ class	Fixed
 		void	setRawBits(int const raw);
 		float	toFloat() const;
 		int		toInt() const;
+
+		static Fixed	min(Fixed &, Fixed &);
+		static Fixed	max(Fixed &, Fixed &);
+		static Fixed	min(Fixed const &, Fixed const &);
+		static Fixed	max(Fixed const &, Fixed const &);
 
 	private:
 		int					_value;
