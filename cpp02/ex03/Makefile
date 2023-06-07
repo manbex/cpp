@@ -34,7 +34,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp $(addprefix $(INC_DIR), $(INC))
 					$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):		$(OBJ)
-					@$(CC) $(CFLAGS) $(OBJ) -o $@
+					$(CC) $(CFLAGS) $(OBJ) -o $@
 
 all:			$(NAME)
 

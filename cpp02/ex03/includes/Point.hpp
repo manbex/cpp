@@ -2,6 +2,7 @@
 # define __POINT_H__
 
 #include "Fixed.hpp"
+# include <iostream>
 
 class	Point
 {

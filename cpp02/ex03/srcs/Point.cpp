@@ -4,9 +4,8 @@ Point::Point(): _x(0), _y(0)
 {
 }
 
-Point::Point(Point const &cpy)
+Point::Point(Point const &cpy): _x(cpy.getX()), _y(cpy.getY())
 {
-	*this = cpy;
 }
 
 Point::Point(float const a, float const b): _x(a), _y(b)
