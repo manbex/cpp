@@ -3,10 +3,9 @@
 
 int	main()
 {
-	ScavTrap	test("Test");
+	FragTrap	test("Test");
 
 	test.info();
-	test.attack("Target");
-	test.guardGate();
+	test.highFivesGuys();
 	return (0);
 }

@@ -6,14 +6,14 @@
 #include "ClapTrap.hpp"
 
 
-class ScavTrap: public ClapTrap
+class FragTrap: public ClapTrap
 {
 	public:
-		ScavTrap();
-		ScavTrap(std::string const);
-		ScavTrap(ScavTrap const &);
-		~ScavTrap();
-		ScavTrap	&operator=(ScavTrap const &);
+		FragTrap();
+		FragTrap(std::string const);
+		FragTrap(FragTrap const &);
+		~FragTrap();
+		FragTrap	&operator=(FragTrap const &);
 	
 		void	attack(std::string const &);
 		void	highFivesGuys();
