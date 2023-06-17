@@ -1,5 +1,5 @@
-#ifndef __SCAVTRAP_H__
-# define __SCAVTRAP_H__
+#ifndef __FRAGTRAP_H__
+# define __FRAGTRAP_H__
 
 #include <string>
 #include <iostream>
@@ -16,7 +16,7 @@ class ScavTrap: public ClapTrap
 		ScavTrap	&operator=(ScavTrap const &);
 	
 		void	attack(std::string const &);
-		void	guardGate();
+		void	highFivesGuys();
 };
 
 #endif
