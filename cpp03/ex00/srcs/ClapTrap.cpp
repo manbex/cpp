@@ -84,3 +84,9 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	else
 		std::cout << "ClapTrap " << this->_Name << " doesn't have energy points" << std::endl; 
 }
+
+void	ClapTrap::info()
+{
+	std::cout << "Name = " << this->_Name << ", HP = " << this->_HitPoints \
+	<< ", Energy = " << this->_Energy<< ", Damage = " << this->_Damage << std::endl;
+}
