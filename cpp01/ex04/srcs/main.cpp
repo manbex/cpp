@@ -6,7 +6,7 @@
 /*   By: mbenicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:31:05 by mbenicho          #+#    #+#             */
-/*   Updated: 2023/04/22 18:34:07 by mbenicho         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:08:21 by mbenicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 		std::cout << "Usage: ./sed <filename> <s1> <s2>" << std::endl;
 		return (0);
 	}
-	if (*argv[1] == 0 || *argv[2] == 0 || *argv[3] == 0)
+	if (*argv[1] == 0 || *argv[2] == 0)
 	{
 		std::cout << "Error: invalid arguments "<< std::endl;
 		return (1);
