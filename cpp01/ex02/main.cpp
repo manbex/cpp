@@ -7,12 +7,12 @@ int	main()
 	std::string	*stringPTR = &brain;
 	std::string	&stringREF = brain;
 
-	std::cout << &brain << std::endl;
-	std::cout << stringPTR << std::endl;
-	std::cout << &stringREF << std::endl << std::endl;
+	std::cout << &brain << "\n";
+	std::cout << stringPTR << "\n";
+	std::cout << &stringREF << "\n\n";
 
-	std::cout << brain << std::endl;
-	std::cout << *stringPTR << std::endl;
+	std::cout << brain << "\n";
+	std::cout << *stringPTR << "\n";
 	std::cout << stringREF << std::endl;
 	return (0);
 }
