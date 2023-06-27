@@ -1,12 +1,18 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap(): ClapTrap()
 {
+	this->_HitPoints = 100;
+	this->_Energy = 50;
+	this->_Damage = 20;
 	std::cout << "ScavTrap: default constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string const name): ClapTrap(name)
 {
+	this->_HitPoints = 100;
+	this->_Energy = 50;
+	this->_Damage = 20;
 	std::cout << "ScavTrap " << name << ": constructor called" << std::endl;
 }
 
@@ -31,23 +37,27 @@ ScavTrap	&ScavTrap::operator=(ScavTrap const &cpy)
 
 void	ScavTrap::attack(const std::string &target)
 {
-	if (this->_Energy)
+	if (!this->_Energy)
+		std::cout << "ScavTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
+	else if (!this->_HitPoints)
+		std::cout << "ScavTrap " << this->_Name << " is KO" << std::endl; 
+	else
 	{
 		std::cout << "ScavTrap " << this->_Name << " attacks " << target << ", causing " \
 		<< this->_Damage << " points of damage" << std::endl; 
 		this->_Energy--;
 	}
-	else
-		std::cout << "ScavTrap " << this->_Name << " doesn't have energy points" << std::endl; 
 }
 
 void	ScavTrap::guardGate()
 {
-	if (this->_Energy)
+	if (!this->_Energy)
+		std::cout << "ScavTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
+	else if (!this->_HitPoints)
+		std::cout << "ScavTrap " << this->_Name << " is KO" << std::endl; 
+	else
 	{
 		std::cout << "ScavTrap " << this->_Name << " entered Gate keeper mode" << std::endl; 
 		this->_Energy--;
 	}
-	else
-		std::cout << "ScavTrap " << this->_Name << " doesn't have energy points" << std::endl; 
 }

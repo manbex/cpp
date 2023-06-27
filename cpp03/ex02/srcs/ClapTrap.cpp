@@ -1,11 +1,11 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(): _Name("Default"), _HitPoints(100), _Energy(50), _Damage(20)
+ClapTrap::ClapTrap(): _Name("Default"), _HitPoints(10), _Energy(10), _Damage(0)
 {
 	std::cout << "ClapTrap: default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string const name): _Name(name), _HitPoints(100), _Energy(50), _Damage(20)
+ClapTrap::ClapTrap(std::string const name): _Name(name), _HitPoints(10), _Energy(10), _Damage(0)
 {
 	std::cout << "ClapTrap " << name << ": constructor called" << std::endl;
 }
@@ -13,7 +13,7 @@ ClapTrap::ClapTrap(std::string const name): _Name(name), _HitPoints(100), _Energ
 ClapTrap::ClapTrap(ClapTrap const &cpy)
 {
 	*this = cpy;
-	std::cout << "ClapTrap " << this->_Name << ": copy constructor called" << std::endl;
+	std::cout << "ClapTrap " << this->_Name <<  ": copy constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
@@ -52,14 +52,16 @@ int	ClapTrap::getDamage() const
 
 void	ClapTrap::attack(const std::string &target)
 {
-	if (this->_Energy)
+	if (!this->_Energy)
+		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
+	else if (!this->_HitPoints)
+		std::cout << "ClapTrap " << this->_Name << " is KO" << std::endl; 
+	else
 	{
 		std::cout << "ClapTrap " << this->_Name << " attacks " << target << ", causing " \
 		<< this->_Damage << " points of damage" << std::endl; 
 		this->_Energy--;
 	}
-	else
-		std::cout << "ClapTrap " << this->_Name << " doesn't have energy points" << std::endl; 
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
@@ -74,15 +76,17 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->_Energy)
+	if (!this->_Energy)
+		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
+	else if (!this->_HitPoints)
+		std::cout << "ClapTrap " << this->_Name << " is KO" << std::endl; 
+	else
 	{
 		this->_HitPoints += amount;
 		std::cout << "ClapTrap " << this->_Name << " gains " << amount << \
 		" hit points, leaving him at " << this->_HitPoints << " hit points" << std::endl;
 		this->_Energy--;
 	}
-	else
-		std::cout << "ClapTrap " << this->_Name << " doesn't have energy points" << std::endl; 
 }
 
 void	ClapTrap::info()
