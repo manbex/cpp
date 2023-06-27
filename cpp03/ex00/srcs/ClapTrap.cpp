@@ -2,23 +2,23 @@
 
 ClapTrap::ClapTrap(): _Name("Default"), _HitPoints(10), _Energy(10), _Damage(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "ClapTrap: default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string const name): _Name(name), _HitPoints(10), _Energy(10), _Damage(0)
 {
-	std::cout << "Constructor for \"" << name <<"\" called" << std::endl;
+	std::cout << "ClapTrap " << name << ": constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const &cpy)
 {
 	*this = cpy;
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "ClapTrap " << this->_Name <<  ": copy constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap " << this->_Name << ": destructor called" << std::endl;
 }
 
 ClapTrap	&ClapTrap::operator=(ClapTrap const &cpy)
@@ -52,14 +52,16 @@ int	ClapTrap::getDamage() const
 
 void	ClapTrap::attack(const std::string &target)
 {
-	if (this->_Energy)
+	if (!this->_Energy)
+		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
+	else if (!this->_HitPoints)
+		std::cout << "ClapTrap " << this->_Name << " is KO" << std::endl; 
+	else
 	{
 		std::cout << "ClapTrap " << this->_Name << " attacks " << target << ", causing " \
 		<< this->_Damage << " points of damage" << std::endl; 
 		this->_Energy--;
 	}
-	else
-		std::cout << "ClapTrap " << this->_Name << " doesn't have energy points" << std::endl; 
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
@@ -74,15 +76,17 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->_Energy)
+	if (!this->_Energy)
+		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
+	else if (!this->_HitPoints)
+		std::cout << "ClapTrap " << this->_Name << " is KO" << std::endl; 
+	else
 	{
 		this->_HitPoints += amount;
 		std::cout << "ClapTrap " << this->_Name << " gains " << amount << \
 		" hit points, leaving him at " << this->_HitPoints << " hit points" << std::endl;
 		this->_Energy--;
 	}
-	else
-		std::cout << "ClapTrap " << this->_Name << " doesn't have energy points" << std::endl; 
 }
 
 void	ClapTrap::info()
