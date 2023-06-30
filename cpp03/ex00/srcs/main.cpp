@@ -4,14 +4,33 @@ int	main()
 {
 	ClapTrap	test("Clap");
 
-	test.info();
-	test.attack("Target");
-	test.takeDamage(9);
-	test.beRepaired(5);
+	std::cout << std::endl;
 	test.info();
 	test.takeDamage(9);
-	test.attack("Target");
-	test.beRepaired(5);
 	test.info();
+	test.beRepaired(6);
+	test.info();
+	std::cout << std::endl;
+
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.attack("Enemy");
+	test.info();
+	test.attack("Enemy");
+	test.beRepaired(6);
+	std::cout << std::endl;
+
+	test.takeDamage(10);
+	test.info();
+	test.attack("Enemy");
+	test.beRepaired(6);
+	std::cout << std::endl;
+
 	return (0);
 }
