@@ -46,7 +46,12 @@ std::string	DiamondTrap::getName() const
 
 void	DiamondTrap::whoAmI()
 {
-	std::cout << "Am I " << this->_Name << ", or am I " << ClapTrap::_Name << "?" << std::endl;
+	if (!this->_HitPoints)
+		std::cout << "DiamondTrap " << this->_Name << " is KO" << std::endl; 
+	else if (!this->_Energy)
+		std::cout << "DiamondTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
+	else
+		std::cout << "Am I " << this->_Name << ", or am I " << ClapTrap::_Name << "?" << std::endl;
 }
 
 void	DiamondTrap::attack(const std::string &target)
