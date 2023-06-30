@@ -37,10 +37,10 @@ ScavTrap	&ScavTrap::operator=(ScavTrap const &cpy)
 
 void	ScavTrap::attack(const std::string &target)
 {
-	if (!this->_Energy)
-		std::cout << "ScavTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
-	else if (!this->_HitPoints)
+	if (!this->_HitPoints)
 		std::cout << "ScavTrap " << this->_Name << " is KO" << std::endl; 
+	else if (!this->_Energy)
+		std::cout << "ScavTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
 	else
 	{
 		std::cout << "ScavTrap " << this->_Name << " attacks " << target << ", causing " \
@@ -51,13 +51,13 @@ void	ScavTrap::attack(const std::string &target)
 
 void	ScavTrap::guardGate()
 {
-	if (!this->_Energy)
-		std::cout << "ScavTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
-	else if (!this->_HitPoints)
+	if (!this->_HitPoints)
 		std::cout << "ScavTrap " << this->_Name << " is KO" << std::endl; 
+	else if (!this->_Energy)
+		std::cout << "ScavTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
 	else
 	{
-		std::cout << "ScavTrap " << this->_Name << " entered Gate keeper mode" << std::endl; 
+		std::cout << "ScavTrap " << this->_Name << " entered Gate Keeper mode" << std::endl; 
 		this->_Energy--;
 	}
 }

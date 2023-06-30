@@ -52,10 +52,10 @@ int	ClapTrap::getDamage() const
 
 void	ClapTrap::attack(const std::string &target)
 {
-	if (!this->_Energy)
-		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
-	else if (!this->_HitPoints)
+	if (!this->_HitPoints)
 		std::cout << "ClapTrap " << this->_Name << " is KO" << std::endl; 
+	else if (!this->_Energy)
+		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
 	else
 	{
 		std::cout << "ClapTrap " << this->_Name << " attacks " << target << ", causing " \
@@ -76,10 +76,10 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (!this->_Energy)
-		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
-	else if (!this->_HitPoints)
+	if (!this->_HitPoints)
 		std::cout << "ClapTrap " << this->_Name << " is KO" << std::endl; 
+	else if (!this->_Energy)
+		std::cout << "ClapTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
 	else
 	{
 		this->_HitPoints += amount;
