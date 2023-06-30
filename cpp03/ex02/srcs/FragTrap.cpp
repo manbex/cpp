@@ -37,10 +37,10 @@ FragTrap	&FragTrap::operator=(FragTrap const &cpy)
 
 void	FragTrap::attack(const std::string &target)
 {
-	if (!this->_Energy)
-		std::cout << "FragTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
-	else if (!this->_HitPoints)
+	if (!this->_HitPoints)
 		std::cout << "FragTrap " << this->_Name << " is KO" << std::endl; 
+	else if (!this->_Energy)
+		std::cout << "FragTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
 	else
 	{
 		std::cout << "FragTrap " << this->_Name << " attacks " << target << ", causing " \
@@ -51,10 +51,10 @@ void	FragTrap::attack(const std::string &target)
 
 void	FragTrap::highFivesGuys()
 {
-	if (!this->_Energy)
-		std::cout << "FragTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
-	else if (!this->_HitPoints)
+	if (!this->_HitPoints)
 		std::cout << "FragTrap " << this->_Name << " is KO" << std::endl; 
+	else if (!this->_Energy)
+		std::cout << "FragTrap " << this->_Name << " doesn't have enough energy" << std::endl; 
 	else
 	{
 		std::cout << "FragTrap " << this->_Name << " begs for a high five" << std::endl;
