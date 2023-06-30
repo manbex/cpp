@@ -6,7 +6,7 @@
 #    By: mbenicho <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/12 09:19:04 by mbenicho          #+#    #+#              #
-#    Updated: 2023/06/29 13:23:11 by mbenicho         ###   ########.fr        #
+#    Updated: 2023/06/30 13:17:23 by mbenicho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,15 @@ INC			=	Animal.hpp		\
 				Dog.hpp			\
 				Cat.hpp			\
 				WrongAnimal.hpp	\
-				WrongCat.hpp
+				WrongCat.hpp	\
+				Brain.hpp
 SRC 		=	main.cpp		\
 				Animal.cpp		\
 				Dog.cpp			\
 				Cat.cpp			\
 				WrongAnimal.cpp	\
-				WrongCat.cpp
+				WrongCat.cpp	\
+				Brain.cpp
 
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 

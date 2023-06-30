@@ -1,6 +1,7 @@
 #ifndef __CAT_H__
 # define __CAT_H__
 
+#include "Brain.hpp"
 #include "Animal.hpp"
 #include <string>
 #include <iostream>
@@ -11,10 +12,14 @@ class	Cat: public Animal
 		Cat();
 		Cat(std::string const &);
 		Cat(Cat const &);
-		~Cat();
+		virtual ~Cat();
 		Cat	&operator=(Cat const &);
 
-		virtual void	makeSound() const;		
+		virtual void	makeSound() const;
+		Brain			*getBrain() const;
+
+	private:
+		Brain	*_brain;
 };
 
 #endif
