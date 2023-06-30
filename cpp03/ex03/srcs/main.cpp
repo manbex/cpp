@@ -4,11 +4,18 @@
 
 int	main()
 {
-	DiamondTrap	test("Test");
+	DiamondTrap	test("Diamond");
 
+	std::cout << std::endl;
 	test.info();
 	test.ClapTrap::info();
 	test.attack("Target");
+	std::cout << std::endl;
+
+	test.guardGate();
+	test.highFivesGuys();
 	test.whoAmI();
+	std::cout << std::endl;
+
 	return (0);
 }
