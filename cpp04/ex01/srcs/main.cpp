@@ -6,8 +6,17 @@
 
 int	main()
 {
-	Animal	*a = new Animal[4];
+	Animal	*a[4];
 
+	a[0] = new Dog();
+	a[1] = new Dog();
+	a[2] = new Cat();
+	a[3] = new Cat();
+	std::cout << std::endl;
+
+	for (int i = 0; i < 4; i++)
+		delete a[i];
+	std::cout << std::endl;
 
 	return (0);
 }

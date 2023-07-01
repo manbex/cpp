@@ -15,8 +15,8 @@ Cat::Cat(Cat const &cpy): Animal(cpy)
 
 Cat::~Cat()
 {
-	std::cout << "Cat: destructor called" << std::endl;
 	delete this->_brain;
+	std::cout << "Cat: destructor called" << std::endl;
 }
 
 Cat	&Cat::operator=(Cat const &cpy)
