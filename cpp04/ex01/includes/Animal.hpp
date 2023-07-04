@@ -1,6 +1,7 @@
 #ifndef __ANIMAL_H__
 # define __ANIMAL_H__
 
+#include "Brain.hpp"
 #include <string>
 #include <iostream>
 
@@ -14,7 +15,7 @@ class	Animal
 		Animal	&operator=(Animal const &);
 
 		std::string	getType() const;
-		virtual void	makeSound() const;		
+		virtual void	makeSound() const;
 
 	protected:
 		std::string	_type;

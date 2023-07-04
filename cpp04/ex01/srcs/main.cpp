@@ -18,5 +18,25 @@ int	main()
 		delete a[i];
 	std::cout << std::endl;
 
+	//deep copy tests
+	Dog	*b = new Dog();
+	std::cout << std::endl;
+
+	(*b).setIdea(0, "test idea 1");
+	(*b).setIdea(42, "test idea 2");
+	(*b).getIdeas();
+	std::cout << std::endl;
+
+	Dog	c = Dog(*b);
+	c = *b;
+	std::cout << std::endl;
+
+	delete b;
+	std::cout << std::endl;
+	
+	c.getIdeas();
+	std::cout << std::endl;
+
+
 	return (0);
 }
