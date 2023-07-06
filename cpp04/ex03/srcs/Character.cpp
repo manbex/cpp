@@ -3,25 +3,23 @@
 Character::Character()
 {
 	std::cout << "Character: default constructor called" << std::endl;
-	this->_inventory[0] = NULL;
-	this->_inventory[1] = NULL;
-	this->_inventory[2] = NULL;
-	this->_inventory[3] = NULL;
+	for (int i = 0; i < 4; i++)
+		this->_inventory[i] = NULL;
 }
 
 Character::Character(Character const &cpy)
 {
-	std::cout << "Characte " << cpy.getName() << ": copy constructor called" << std::endl;
+	std::cout << "Character " << cpy.getName() << ": copy constructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+		this->_inventory[i] = NULL;
 	*this = cpy;
 }
 
 Character::Character(std::string const &name): _name(name)
 {
 	std::cout << "Character " << name << ": constructor called" << std::endl;
-	this->_inventory[0] = NULL;
-	this->_inventory[1] = NULL;
-	this->_inventory[2] = NULL;
-	this->_inventory[3] = NULL;
+	for (int i = 0; i < 4; i++)
+		this->_inventory[i] = NULL;
 }
 
 Character::~Character()
@@ -36,12 +34,15 @@ Character::~Character()
 
 Character	&Character::operator=(Character const &cpy)
 {
-	this->_name = cpy.getName();
+	this->_name = cpy._name;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->_inventory[i])
 			delete this->_inventory[i];
-		this->_inventory[i] = cpy._inventory[i]->clone();
+		if (cpy._inventory[i])
+			this->_inventory[i] = cpy._inventory[i]->clone();
+		else
+			this->_inventory[i] = NULL;
 	}
 	return (*this);
 }
@@ -53,6 +54,11 @@ std::string const	&Character::getName() const
 
 void	Character::equip(AMateria *m)
 {
+	if (!m)
+	{
+		std::cout << this->_name << ": can't equip materia: invalid materia" << std::endl;
+		return ;
+	}
 	for (int i = 0; i < 4; i++)
 	{
 		if (m->isEquipped())

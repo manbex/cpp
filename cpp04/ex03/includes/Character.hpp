@@ -21,7 +21,7 @@ class	Character: public ICharacter
 		virtual void				unequip(int idx);
 		virtual void				use(int idx, ICharacter &target);
 		
-	protected:
+	private:
 		std::string		_name;
 		AMateria		*_inventory[4];
 };

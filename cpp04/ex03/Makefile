@@ -16,14 +16,19 @@ INC_DIR		=	includes/
 SRC_DIR		=	srcs/
 OBJ_DIR		=	obj/
 
-INC			=	AMateria.hpp	\
-				Ice.hpp			\
-				ICharacter.hpp	\
-				Character.hpp
-SRC 		=	main.cpp		\
-				AMateria.cpp	\
-				Ice.cpp			\
-				Character.cpp
+INC			=	AMateria.hpp		\
+				Ice.hpp				\
+				Cure.hpp			\
+				ICharacter.hpp		\
+				Character.hpp		\
+				IMateriaSource.hpp	\
+				MateriaSource.hpp
+SRC 		=	main.cpp			\
+				AMateria.cpp		\
+				Ice.cpp				\
+				Cure.cpp			\
+				Character.cpp		\
+				MateriaSource.cpp
 
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
