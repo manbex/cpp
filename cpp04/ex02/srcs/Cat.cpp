@@ -16,8 +16,8 @@ Cat::Cat(Cat const &cpy): Animal(cpy)
 
 Cat::~Cat()
 {
-	delete this->_brain;
 	std::cout << "Cat: destructor called" << std::endl;
+	delete this->_brain;
 }
 
 Cat	&Cat::operator=(Cat const &cpy)
@@ -38,8 +38,7 @@ void	Cat::makeSound() const
 
 Brain			*Cat::getBrain() const
 {
-	Brain *tmp = new Brain();
-	*tmp = *this->_brain;
+	Brain *tmp = new Brain(*this->_brain);
 	return (tmp);	
 }
 
@@ -48,7 +47,7 @@ void	Cat::setIdea(int const &i, std::string const &idea)
 	this->_brain->setIdea(i, idea);
 }
 
-void	Cat::getIdeas() const
+void	Cat::showIdeas() const
 {
 	std::string	tmp;
 

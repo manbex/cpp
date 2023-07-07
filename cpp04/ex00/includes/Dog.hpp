@@ -11,10 +11,10 @@ class	Dog: public Animal
 		Dog();
 		Dog(std::string const &);
 		Dog(Dog const &);
-		~Dog();
+		virtual ~Dog();
 		Dog	&operator=(Dog const &);
 
-		virtual void	makeSound() const;		
+		virtual void	makeSound() const;
 };
 
 #endif

@@ -6,10 +6,11 @@
 
 int	main()
 {
-	//Animal	a = Animal();
-	//Animal	b = Dog();
-	Dog 	c = Dog();
-	//(Animal)c;
+	//Animal	a;
+	Animal	*test = new Dog();
+	std::cout << std::endl;
+
+	delete test;
 	std::cout << std::endl;
 
 	return (0);

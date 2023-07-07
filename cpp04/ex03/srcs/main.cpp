@@ -70,6 +70,7 @@ int	main()
 	test->equip(m3);
 	test->equip(m4);
 	test->equip(m5);
+	dummy->equip(m3);
 	std::cout << std::endl;
 
 	test->use(0, *dummy);
@@ -79,6 +80,7 @@ int	main()
 	std::cout << std::endl;
 
 	test->unequip(2);
+	test->use(2, *dummy);
 	dummy->equip(m3);
 	test->equip(m5);
 	test->use(2, *dummy);

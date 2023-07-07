@@ -18,7 +18,7 @@ Animal::~Animal()
 
 Animal	&Animal::operator=(Animal const &cpy)
 {
-	this->_type = cpy.getType();
+	this->_type = cpy._type;
 	return (*this);
 }
 

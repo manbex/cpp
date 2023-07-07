@@ -2,14 +2,14 @@
 
 Dog::Dog(): Animal()
 {
-	this->_type = "Dog";
 	std::cout << "Dog: default constructor called" << std::endl;
+	this->_type = "Dog";
 }
 
 Dog::Dog(Dog const &cpy): Animal(cpy)
 {
-	*this = cpy;
 	std::cout << "Dog: copy constructor called" << std::endl;
+	*this = cpy;
 }
 
 Dog::~Dog()
@@ -19,11 +19,11 @@ Dog::~Dog()
 
 Dog	&Dog::operator=(Dog const &cpy)
 {
-	this->_type = cpy.getType();
+	this->_type = cpy._type;
 	return (*this);
 }
 
 void	Dog::makeSound() const
 {
-	std::cout << "Dog is woofing"<< std::endl;	
+	std::cout << "Dog is barking"<< std::endl;	
 }

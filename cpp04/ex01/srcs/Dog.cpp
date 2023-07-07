@@ -16,8 +16,8 @@ Dog::Dog(Dog const &cpy): Animal(cpy)
 
 Dog::~Dog()
 {
-	delete this->_brain;
 	std::cout << "Dog: destructor called" << std::endl;
+	delete this->_brain;
 }
 
 Dog	&Dog::operator=(Dog const &cpy)
@@ -33,13 +33,12 @@ Dog	&Dog::operator=(Dog const &cpy)
 
 void	Dog::makeSound() const
 {
-	std::cout << "Dog is woofing"<< std::endl;	
+	std::cout << "Dog is barking"<< std::endl;	
 }
 
 Brain			*Dog::getBrain() const
 {
-	Brain *tmp = new Brain();
-	*tmp = *this->_brain;
+	Brain *tmp = new Brain(*this->_brain);
 	return (tmp);	
 }
 
@@ -48,7 +47,7 @@ void	Dog::setIdea(int const &i, std::string const &idea)
 	this->_brain->setIdea(i, idea);
 }
 
-void	Dog::getIdeas() const
+void	Dog::showIdeas() const
 {
 	std::string	tmp;
 

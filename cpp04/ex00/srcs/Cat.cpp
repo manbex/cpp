@@ -2,14 +2,14 @@
 
 Cat::Cat(): Animal()
 {
-	this->_type = "Cat";
 	std::cout << "Cat: default constructor called" << std::endl;
+	this->_type = "Cat";
 }
 
 Cat::Cat(Cat const &cpy): Animal(cpy)
 {
-	*this = cpy;
 	std::cout << "Cat: copy constructor called" << std::endl;
+	*this = cpy;
 }
 
 Cat::~Cat()
@@ -19,7 +19,7 @@ Cat::~Cat()
 
 Cat	&Cat::operator=(Cat const &cpy)
 {
-	this->_type = cpy.getType();
+	this->_type = cpy._type;
 	return (*this);
 }
 

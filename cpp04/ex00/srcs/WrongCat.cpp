@@ -2,7 +2,7 @@
 
 WrongCat::WrongCat(): WrongAnimal()
 {
-	this->_type = "WrongCat";
+	this->_type = "Wrong Cat";
 	std::cout << "WrongCat: default constructor called" << std::endl;
 }
 

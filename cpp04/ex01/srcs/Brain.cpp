@@ -7,8 +7,8 @@ Brain::Brain()
 
 Brain::Brain(Brain const &cpy)
 {
-	*this = cpy;
 	std::cout << "Brain: cpy constructor called" << std::endl;
+	*this = cpy;
 }
 
 Brain::~Brain()
@@ -19,7 +19,7 @@ Brain::~Brain()
 Brain	&Brain::operator=(Brain const &cpy)
 {
 	for (int i = 0; i < 100; i++)
-		this->_ideas[i] = cpy.getIdea(i);
+		this->_ideas[i] = cpy._ideas[i];
 	return (*this);
 }
 
