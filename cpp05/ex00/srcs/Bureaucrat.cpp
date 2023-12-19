@@ -1,12 +1,10 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(): _name(""), _grade(150)
-{
-}
+{}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &cpy): _name(cpy._name), _grade(cpy._grade)
-{
-}
+{}
 
 Bureaucrat::Bureaucrat(const std::string &name, const int &grade): _name(name), _grade(grade)
 {
@@ -18,8 +16,7 @@ Bureaucrat::Bureaucrat(const std::string &name, const int &grade): _name(name), 
 }
 
 Bureaucrat::~Bureaucrat()
-{
-}
+{}
 
 Bureaucrat		&Bureaucrat::operator=(const Bureaucrat &cpy)
 {

@@ -11,10 +11,10 @@ class	Form
 {
 	public:
 		Form();
-		Form(Form &);
-		Form(std::string const &, int const &, int const &);
+		Form(const Form &);
+		Form(const std::string &, const int &, const int &);
 		~Form();
-		Form	&operator=(Form &);
+		Form	&operator=(const Form &);
 
 		std::string	getName();
 		int			getGradeToSign();

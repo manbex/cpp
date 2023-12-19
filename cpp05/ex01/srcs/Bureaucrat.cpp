@@ -1,14 +1,12 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(): _name(""), _grade(150)
-{
-}
+{}
 
-Bureaucrat::Bureaucrat(Bureaucrat &cpy): _name(cpy.getName()), _grade(cpy.getGrade())
-{
-}
+Bureaucrat::Bureaucrat(const Bureaucrat &cpy): _name(cpy._name), _grade(cpy._grade)
+{}
 
-Bureaucrat::Bureaucrat(std::string const &name, int const &grade): _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(const std::string &name, const int &grade): _name(name), _grade(grade)
 {
 	std::cout << "Initialise bureaucrat "<< this->_name << " with grade " << grade <<  std::endl;
 	if (grade > 150)
@@ -18,12 +16,11 @@ Bureaucrat::Bureaucrat(std::string const &name, int const &grade): _name(name), 
 }
 
 Bureaucrat::~Bureaucrat()
-{
-}
+{}
 
-Bureaucrat		&Bureaucrat::operator=(Bureaucrat &cpy)
+Bureaucrat		&Bureaucrat::operator=(const Bureaucrat &cpy)
 {
-	this->_grade = cpy.getGrade();
+	this->_grade = cpy._grade;
 	return (*this);
 }
 
