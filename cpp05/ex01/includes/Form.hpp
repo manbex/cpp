@@ -11,17 +11,17 @@ class	Form
 {
 	public:
 		Form();
-		Form(const Form &);
-		Form(const std::string &, const int &, const int &);
+		Form(Form const &);
+		Form(std::string const &, int const &, int const &);
 		~Form();
-		Form	&operator=(const Form &);
+		Form	&operator=(Form const &);
 
-		std::string	getName();
-		int			getGradeToSign();
-		int			getGradeToExecute();
-		bool		isSigned();
+		std::string	getName() const;
+		int			getGradeToSign() const;
+		int			getGradeToExecute() const;
+		bool		isSigned() const;
 
-		void	beSigned(Bureaucrat &);
+		void		beSigned(Bureaucrat &);
 
 		class GradeTooHighException: public std::exception
 		{
@@ -42,12 +42,12 @@ class	Form
 		};
 
 	private:
-		const std::string	_name;
-		const int			_gradeToSign;
-		const int			_gradeToExecute;
+		std::string const	_name;
+		int const			_gradeToSign;
+		int const			_gradeToExecute;
 		bool				_signed;
 };
 
-std::ostream	&operator<<(std::ostream &, Form &);
+std::ostream	&operator<<(std::ostream &, Form const &);
 
 #endif

@@ -7,14 +7,14 @@ Form::Form():
 	_signed(false)
 {}
 
-Form::Form(const Form &cpy):
+Form::Form(Form const &cpy):
 	_name(cpy._name),
 	_gradeToSign(cpy._gradeToSign), 
 	_gradeToExecute(cpy._gradeToExecute),
 	_signed(cpy._signed)
 {}
 
-Form::Form(const std::string &name, const int &gradeToSign, const int &gradeToExecute): 
+Form::Form(std::string const &name, int const &gradeToSign, int const &gradeToExecute): 
 	_name(name),
 	_gradeToSign(gradeToSign),
 	_gradeToExecute(gradeToExecute),
@@ -31,28 +31,28 @@ Form::Form(const std::string &name, const int &gradeToSign, const int &gradeToEx
 Form::~Form()
 {}
 
-Form			&Form::operator=(const Form &cpy)
+Form			&Form::operator=(Form const &cpy)
 {
 	(void)cpy;
 	return (*this);
 }
 
-std::string		Form::getName()
+std::string		Form::getName() const
 {
 	return (this->_name);
 }
 
-int				Form::getGradeToSign()
+int				Form::getGradeToSign() const
 {
 	return (this->_gradeToSign);
 }
 
-int				Form::getGradeToExecute()
+int				Form::getGradeToExecute() const
 {
 	return (this->_gradeToExecute);
 }
 
-bool			Form::isSigned()
+bool			Form::isSigned() const
 {
 	return (this->_signed);
 }
@@ -64,7 +64,7 @@ void	Form::beSigned(Bureaucrat &bureaucrat)
 	this->_signed = true;
 }
 
-std::ostream	&operator<<(std::ostream &o, Form &Form)
+std::ostream	&operator<<(std::ostream &o, Form const &Form)
 {
 	o << Form.getName() << ", grade to sign " << Form.getGradeToSign() << ", grade to execute " \
 	<< Form.getGradeToExecute();

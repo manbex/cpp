@@ -3,10 +3,10 @@
 Bureaucrat::Bureaucrat(): _name(""), _grade(150)
 {}
 
-Bureaucrat::Bureaucrat(const Bureaucrat &cpy): _name(cpy._name), _grade(cpy._grade)
+Bureaucrat::Bureaucrat(Bureaucrat const &cpy): _name(cpy._name), _grade(cpy._grade)
 {}
 
-Bureaucrat::Bureaucrat(const std::string &name, const int &grade): _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(std::string const &name, int const &grade): _name(name), _grade(grade)
 {
 	std::cout << "Initialise bureaucrat "<< this->_name << " with grade " << grade <<  std::endl;
 	if (grade > 150)
@@ -18,18 +18,18 @@ Bureaucrat::Bureaucrat(const std::string &name, const int &grade): _name(name), 
 Bureaucrat::~Bureaucrat()
 {}
 
-Bureaucrat		&Bureaucrat::operator=(const Bureaucrat &cpy)
+Bureaucrat		&Bureaucrat::operator=(Bureaucrat const &cpy)
 {
 	this->_grade = cpy._grade;
 	return (*this);
 }
 
-std::string		Bureaucrat::getName()
+std::string		Bureaucrat::getName() const
 {
 	return (this->_name);
 }
 
-int				Bureaucrat::getGrade()
+int				Bureaucrat::getGrade() const
 {
 	return (this->_grade);
 }
@@ -63,7 +63,7 @@ void			Bureaucrat::signForm(Form &form)
 	}
 }
 
-std::ostream	&operator<<(std::ostream &o, Bureaucrat &bureaucrat)
+std::ostream	&operator<<(std::ostream &o, Bureaucrat const &bureaucrat)
 {
 	o << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
 	return (o);
