@@ -35,7 +35,7 @@ clean:
 					$(RM) -r $(OBJ_DIR)
 
 fclean:			clean
-					$(RM) $(NAME)
+					$(RM) $(NAME) home_shrubbery
 
 re:				fclean all
 
