@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <climits>
 
 class	ScalarConverter
 {
@@ -17,6 +19,7 @@ class	ScalarConverter
 
 		typedef enum	e_type
 		{
+			LITERAL,
 			CHAR,
 			INT,
 			FLOAT,
