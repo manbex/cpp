@@ -4,7 +4,8 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <climits>
+
+#include <limits>
 
 class	ScalarConverter
 {
@@ -22,8 +23,7 @@ class	ScalarConverter
 			LITERAL,
 			CHAR,
 			INT,
-			FLOAT,
-			DOUBLE,
+			DECIMAL,
 			INVALID
 		}	type;
 
