@@ -23,5 +23,15 @@ int	main()
 
 	std::cout << span.shortestSpan() << std::endl;
 	std::cout << span.longestSpan() << std::endl;
+
+	std::cout << std::endl;
+	span.fill(-1);
+	span.print();
+
+	std::cout << std::endl;
+	Span	b(10);
+	b.addNumber(10);
+	b.fill(0);
+	b.print();
 	return (0);
 }

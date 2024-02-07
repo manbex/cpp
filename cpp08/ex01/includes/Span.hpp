@@ -19,6 +19,7 @@ class	Span
 		unsigned int	shortestSpan() const;
 		unsigned int	longestSpan() const;
 		void			print() const;
+		void			fill(int const &value);
 
 		class			SpanFullException;
 		class			NotEnoughElementsException;

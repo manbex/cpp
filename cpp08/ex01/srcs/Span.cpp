@@ -27,6 +27,11 @@ void			Span::addNumber(int const &value)
 	this->_content.push_back(value);
 }
 
+void			Span::fill(int const &value)
+{
+	this->_content.resize(this->_size, value);
+}
+
 static int		diff(int const &n1, int const &n2)
 {
 	int res = n1 - n2;
