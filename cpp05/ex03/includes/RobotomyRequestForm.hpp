@@ -10,18 +10,20 @@
 class	RobotomyRequestForm: public AForm
 {
 	public:
-		RobotomyRequestForm();
 		RobotomyRequestForm(RobotomyRequestForm const &);
 		RobotomyRequestForm(std::string const &);
 		virtual ~RobotomyRequestForm();
+
 		RobotomyRequestForm	&operator=(RobotomyRequestForm const &);
 
-		std::string	getTarget() const;
+		std::string			getTarget() const;
 
-		virtual void	executeForm() const;
+		virtual void		executeForm() const;
 
 	private:
 		std::string const	_target;
+
+		RobotomyRequestForm();
 };
 
 #endif

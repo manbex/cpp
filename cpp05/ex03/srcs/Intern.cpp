@@ -11,7 +11,7 @@ Intern::Intern(Intern const &cpy)
 Intern::~Intern()
 {}
 
-Intern	&Intern::operator=(Intern const &cpy)
+Intern			&Intern::operator=(Intern const &cpy)
 {
 	(void)cpy;
 	return (*this);
@@ -32,18 +32,15 @@ static AForm	*makePresidentialPardonForm(std::string const &target)
 	return (new PresidentialPardonForm(target));
 }
 
-typedef AForm	*(*f)(std::string const &);
-typedef struct	{std::string const name; f func;} Type;
+Intern::FormType	Intern::type[] =
+{
+	{"ShrubberyCreationForm", &makeShrubberyCreationForm},
+	{"RobotomyRequestForm", &makeRobotomyRequestForm},
+	{"PresidentialPardonForm", &makePresidentialPardonForm}
+};
 
 AForm	*Intern::makeForm(std::string const &name, std::string const &target)
 {
-	Type	type[] =
-	{
-		{"ShrubberyCreationForm", &makeShrubberyCreationForm},
-		{"RobotomyRequestForm", &makeRobotomyRequestForm},
-		{"PresidentialPardonForm", &makePresidentialPardonForm}
-	};
-	
 	for (int i = 0; i < 3; i++)
 	{ 
 		if (type[i].name == name)
@@ -55,4 +52,3 @@ AForm	*Intern::makeForm(std::string const &name, std::string const &target)
 	std::cerr << "Intern couldn't create " << name << ": invalid form type" << std::endl;
 	return (NULL);
 }
-

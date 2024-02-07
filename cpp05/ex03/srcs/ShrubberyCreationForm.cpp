@@ -1,10 +1,5 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm():
-	AForm("Shrubbery creation form", 145, 137),
-	_target("default")
-{}
-
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &cpy):
 	AForm(cpy),
 	_target(cpy._target)
@@ -26,12 +21,12 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 	return (*this);
 }
 
-std::string	ShrubberyCreationForm::getTarget() const
+std::string				ShrubberyCreationForm::getTarget() const
 {
 	return (this->_target);
 }
 
-void	drawTree(std::ofstream &file)
+void					drawTree(std::ofstream &file)
 {
 	file << "              _{\\ _{\\{\\/}/}/}__\n";
 	file << "             {/{/\\}{/{/\\}(\\}{/\\} _\n";
@@ -65,7 +60,7 @@ void	drawTree(std::ofstream &file)
 	file << "    .       .        .    ' '-.\n";
 }
 
-void	ShrubberyCreationForm::executeForm() const
+void					ShrubberyCreationForm::executeForm() const
 {
 	std::string		filename = this->_target + "_shrubbery";
 	std::ofstream	file;
@@ -77,4 +72,9 @@ void	ShrubberyCreationForm::executeForm() const
 	}
 	drawTree(file);
 	file.close();
+}
+
+const char				*ShrubberyCreationForm::FileErrorException::what() const throw()
+{
+	return ("Error while opening file");
 }
