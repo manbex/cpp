@@ -1,12 +1,5 @@
 #include "Form.hpp"
 
-Form::Form():
-	_name(""),
-	_gradeToSign(150), 
-	_gradeToExecute(150),
-	_signed(false)
-{}
-
 Form::Form(Form const &cpy):
 	_name(cpy._name),
 	_gradeToSign(cpy._gradeToSign), 
@@ -33,7 +26,7 @@ Form::~Form()
 
 Form			&Form::operator=(Form const &cpy)
 {
-	(void)cpy;
+	static_cast<void>(cpy);
 	return (*this);
 }
 
@@ -57,11 +50,21 @@ bool			Form::isSigned() const
 	return (this->_signed);
 }
 
-void	Form::beSigned(Bureaucrat &bureaucrat)
+void			Form::beSigned(Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > this->_gradeToSign)
 		throw Form::GradeTooLowException();
 	this->_signed = true;
+}
+
+const char	*Form::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char	*Form::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
 }
 
 std::ostream	&operator<<(std::ostream &o, Form const &Form)
