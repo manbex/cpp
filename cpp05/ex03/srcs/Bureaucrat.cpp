@@ -44,7 +44,7 @@ void			Bureaucrat::setGrade(int const &grade)
 	std::cout << this->_name << "'s grade set to " << grade << std::endl;
 }
 
-void	Bureaucrat::increaseGrade()
+void			Bureaucrat::increaseGrade()
 {
 	std::cout << this->_name << " increases grade" << std::endl;
 	this->_grade--;
@@ -52,7 +52,7 @@ void	Bureaucrat::increaseGrade()
 		throw Bureaucrat::GradeTooHighException();
 }
 
-void	Bureaucrat::decreaseGrade()
+void			Bureaucrat::decreaseGrade()
 {
 	std::cout << this->_name << " decreases grade" << std::endl;
 	this->_grade++;
@@ -84,6 +84,16 @@ void			Bureaucrat::executeForm(AForm const &form)
 	{
 		std::cerr << this->_name << " failed to execute " << form.getName() << ": " << e.what() << std::endl;
 	}
+}
+
+const char		*Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char		*Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
 }
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat const &bureaucrat)

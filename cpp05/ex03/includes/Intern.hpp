@@ -17,6 +17,15 @@ class	Intern
 		Intern	&operator=(Intern const &cpy);
 
 		AForm	*makeForm(std::string const &, std::string const &);
+
+	private:
+		typedef struct
+		{
+			std::string const	name;
+			AForm				*(*func)(std::string const &);
+		}	FormType;
+
+		static FormType			type[];
 };
 
 #endif
