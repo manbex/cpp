@@ -1,8 +1,5 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(): _name(""), _grade(150)
-{}
-
 Bureaucrat::Bureaucrat(Bureaucrat const &cpy): _name(cpy._name), _grade(cpy._grade)
 {}
 
@@ -34,7 +31,7 @@ int				Bureaucrat::getGrade() const
 	return (this->_grade);
 }
 
-void	Bureaucrat::increaseGrade()
+void			Bureaucrat::increaseGrade()
 {
 	std::cout << this->_name << " increases grade" << std::endl;
 	this->_grade--;
@@ -42,12 +39,22 @@ void	Bureaucrat::increaseGrade()
 		throw Bureaucrat::GradeTooHighException();
 }
 
-void	Bureaucrat::decreaseGrade()
+void			Bureaucrat::decreaseGrade()
 {
 	std::cout << this->_name << " decreases grade" << std::endl;
 	this->_grade++;
 	if (this->_grade > 150)
 		throw Bureaucrat::GradeTooLowException();
+}
+
+const char		*Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char		*Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
 }
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat const &bureaucrat)
