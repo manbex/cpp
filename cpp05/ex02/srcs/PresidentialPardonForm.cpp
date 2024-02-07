@@ -1,10 +1,5 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm():
-	AForm("Presidential pardon form", 145, 137),
-	_target("default")
-{}
-
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &cpy):
 	AForm(cpy),
 	_target(cpy._target)
@@ -26,12 +21,12 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm
 	return (*this);
 }
 
-std::string	PresidentialPardonForm::getTarget() const
+std::string				PresidentialPardonForm::getTarget() const
 {
 	return (this->_target);
 }
 
-void	PresidentialPardonForm::executeForm() const
+void					PresidentialPardonForm::executeForm() const
 {
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
