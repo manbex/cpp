@@ -6,7 +6,7 @@
 /*   By: mbenicho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 13:37:01 by mbenicho          #+#    #+#             */
-/*   Updated: 2024/03/22 13:37:05 by mbenicho         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:41:15 by mbenicho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &cpy
 {}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string const &target):
-	AForm("Presidential pardon form", 145, 137),
+	AForm("Presidential pardon form", 25, 5),
 	_target(target)
 {
 	std::cout << "Presidential pardon form initialised with target " << target << std::endl;
