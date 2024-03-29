@@ -3,13 +3,12 @@
 int	main()
 {
 	Array<int>	*a = new Array<int>();
-
 	std::cout << "Int array a initialized with default constructor" << std::endl;
 	std::cout << "a size: " << a->size() << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "Int array b initialized with size 10" <<std::endl;
 	Array<int>	*b = new Array<int>(10);
+	std::cout << "Int array b initialized with size 10" <<std::endl;
 	std::cout << "b size: " << b->size() << std::endl;
 	std::cout << std::endl;
 
@@ -41,7 +40,6 @@ int	main()
 	delete a;
 
 	Array<std::string>	c = Array<std::string>(5);
-
 	std::cout << "String array c initialized with size 5" << std::endl;
 	try
 	{
