@@ -39,13 +39,21 @@ int	main()
 	std::cout << std::endl;
 	delete a;
 
-	Array<std::string>	c = Array<std::string>(5);
-	std::cout << "String array c initialized with size 5" << std::endl;
+	Array<int>	c(12);
+	std::cout << "Int array c initialized with size 12" <<std::endl;
+	std::cout << "c size: " << c.size() << std::endl;
+	std::cout << "Int array d initialized as a copy of d" <<std::endl;
+	Array<int>	d(c);
+	std::cout << "d size: " << d.size() << std::endl;
+	std::cout << std::endl;
+
+	Array<std::string>	e = Array<std::string>(5);
+	std::cout << "String array e initialized with size 5" << std::endl;
 	try
 	{
-		c[3] = "\"This is a test\"";
-		std::cout << "\"This is a test\" assigned to c[3]" << std::endl;
-		std::cout << "c[3] = " << c[3] << std::endl;
+		e[3] = "\"This is a test\"";
+		std::cout << "\"This is a test\" assigned to e[3]" << std::endl;
+		std::cout << "e[3] = " << e[3] << std::endl;
 	}
 	catch (std::exception &e)
 	{

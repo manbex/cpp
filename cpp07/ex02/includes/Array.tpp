@@ -13,7 +13,7 @@ Array<T>::Array(unsigned int const &n)
 }
 
 template<typename T>
-Array<T>::Array(Array const &cpy)
+Array<T>::Array(Array const &cpy): _array(new T[0])
 {
 	*this = cpy;
 }
