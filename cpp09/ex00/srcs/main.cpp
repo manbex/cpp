@@ -8,5 +8,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	static_cast<void>(argv);
+	if (BitcoinExchange::loadDatabase("data.csv"))
+		return (1);
+	if (BitcoinExchange::checkInput(argv[1]))
+		return (1);
 	return (0);
 }
