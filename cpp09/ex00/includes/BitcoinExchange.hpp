@@ -41,7 +41,6 @@ class	BitcoinExchange
 		static int			compareDate(date const &d1, date const &d2);
 		static void			parseInput(std::string const &str);
 		static int			checkDate(date const &date);
-
 };
 
 #endif
