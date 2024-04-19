@@ -12,11 +12,11 @@ static int	isInSet(char c, std::string set)
 	return (0);
 }
 
-void	RPN::operate(char const &c, std::stack<int> &stack)
+void	RPN::operate(char const &c, std::stack<long int> &stack)
 {
-	int	n1;
-	int	n2;
-	int	res;
+	long int	n1;
+	long int	n2;
+	long int	res;
 
 	if (stack.size() < 2) {
 		throw (RPN::badArgException());
@@ -38,17 +38,21 @@ void	RPN::operate(char const &c, std::stack<int> &stack)
 			res = n1 * n2;
 			break ;
 		case '/':
+		{
+			if (n2 == 0)
+				throw (RPN::divisionByZeroException());
 			res = n1 / n2;
 			break ;
+		}
 	}
 	stack.push(res);
 }
 
 void	RPN::calculate(std::string str)
 {
-	std::stack<int>	stack;
+	std::stack<long int>	stack;
 	std::string		s;
-	size_t			pos;
+	size_t			pos = 0;
 
 	while (pos != std::string::npos)
 	{
@@ -65,7 +69,7 @@ void	RPN::calculate(std::string str)
 			throw (RPN::badArgException());
 		}
 		if (isInSet(s[0], "0123456789")) {
-			stack.push(static_cast<int>(s[0] - '0'));
+			stack.push(static_cast<long int>(s[0] - '0'));
 		}
 		else {
 			RPN::operate(s[0], stack);

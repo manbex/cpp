@@ -10,12 +10,17 @@ class	RPN
 	public:
 		static void	calculate(std::string);
 
-		class	badArgException: public std::exception
-		{
+		class	badArgException: public std::exception {
 			public:
-				virtual const char	*what() const throw()
-				{
+				virtual const char	*what() const throw() {
 					return ("bad arguments");
+				}
+		};
+
+		class	divisionByZeroException: public std::exception {
+			public:
+				virtual const char	*what() const throw() {
+					return ("division by zero");
 				}
 		};
 
@@ -25,7 +30,7 @@ class	RPN
 		~RPN();
 		RPN	&operator=(RPN const &);
 
-		static void	operate(char const &, std::stack<int> &);
+		static void	operate(char const &, std::stack<long int> &);
 };
 
 #endif
