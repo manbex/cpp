@@ -12,7 +12,7 @@ static int	isInSet(char c, std::string set)
 	return (0);
 }
 
-void	RPN::operate(char const &c, std::stack<long int> &stack)
+void	RPN::operate(char const &c, std::stack<long int, std::list<long int> > &stack)
 {
 	long int	n1;
 	long int	n2;
@@ -50,7 +50,7 @@ void	RPN::operate(char const &c, std::stack<long int> &stack)
 
 void	RPN::calculate(std::string str)
 {
-	std::stack<long int>	stack;
+	std::stack<long int, std::list<long int> >	stack;
 	std::string		s;
 	size_t			pos = 0;
 

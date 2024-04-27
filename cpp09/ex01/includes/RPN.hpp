@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <stack>
+#include <list>
 
 class	RPN
 {
@@ -30,7 +31,7 @@ class	RPN
 		~RPN();
 		RPN	&operator=(RPN const &);
 
-		static void	operate(char const &, std::stack<long int> &);
+		static void	operate(char const &, std::stack<long int, std::list<long int> > &);
 };
 
 #endif
