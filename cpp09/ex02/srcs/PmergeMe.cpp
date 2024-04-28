@@ -1,157 +1,78 @@
 #include "PmergeMe.hpp"
 
-void	print(int n)
+template <typename Container>
+void	PmergeMe<Container>::swapElement(iterator &element, size_t &itSize)
 {
-		std::cout << n << std::endl;
+	int	tmp;
+
+		for (iterator it = element; it != element + (itSize / 2); it++)
+	{
+		tmp = *it;
+		*it = *(it + (itSize / 2));
+		*(it + (itSize / 2)) = tmp;
+	}
 }
 
-int		PmergeMe::checkOverflow(std::string const &str, size_t &size)
+template <typename Container>
+void	PmergeMe<Container>::sort(Container &container, size_t itSize, size_t const &maxSize)
 {
-	size_t	i = 0;
-
-	if (str[i] == '+' || str[i] == '-') {
-		i++;
+	size_t	size = container.size() / itSize;
+	std::cout << "size: " << size << std::endl;
+	if (size == 1) {
+		return ;
 	}
-	if (size - i > 10)
-		return (1);
-	if (size - i < 10)
-		return (0);
+	
+	bool	hasStray = (size % 2 != 0);
 
-	std::string test = str[0] == '-' ? "2147483648" : "2147483647";
-	size_t j = 0;
-	while (j < 10)
+	iterator	begin = container.begin();
+	iterator	end = container.end();
+
+	for (iterator it = begin; it != end; it += itSize)
 	{
-		if (str[i] < test[j]) {
-			return (0);
+		if (*(it + (itSize / 2) - 1) > *(it + itSize - 1)) {
+			swapElement(it, itSize);
 		}
-		if (str[i] > test[j]) {
-			return (1);
-		}
-		i++;
-		j++;
-	}
-	return (0);
-}
-
-int		PmergeMe::parseInt(std::string const &str, int &n)
-{
-	size_t	i = 0;
-	size_t	size = str.size();
-
-	if (str[i] == '+' || str[i] == '-') {
-		i++;
-	}
-	while (i < size)
-	{
-		if (!isdigit(str[i]))
+		std::cout << "element: ";
+		for (iterator itt = it; itt != it + itSize; itt++)
 		{
-			std::cerr << "Error: wrong argument: " << str << std::endl;
-			return (1);
+			std::cout << *itt << ", ";
 		}
-		i++;
+		std::cout << std::endl;
 	}
-	if (checkOverflow(str, size))
+
+	if (hasStray)
 	{
-		std::cerr << "Error: int overflow: " << str << std::endl;
-		return (1);
-	}
-	std::stringstream	sstream;
-	sstream << str;
-	sstream >> n;
-	return (0);
-}
-
-int	PmergeMe::countWord(char const *str)
-{
-	size_t	count = 0;
-
-	for (size_t i = 0; str[i]; i++)
-	{
-		if (str[i] != ' ') {
-			count++;
-		}
-		while (str[i + 1] && str[i] != ' ') {
-			i++;
-		}
-	}
-	return (count);
-}
-
-void	PmergeMe::trimString(std::string &str)
-{
-	size_t	pos = str.find_first_not_of(" \t\r\b\n");
-
-	if (pos != std::string::npos)
-		str.erase(0, pos);
-	pos = str.find_last_not_of(" \t\r\b\n");
-	if (pos != std::string::npos && pos < str.size() - 1)
-		str.erase(pos + 1);
-}
-
-int	*PmergeMe::parseArg(std::string str, size_t &tab_size)
-{
-	std::string	s;
-	size_t		size = str.size();
-	size_t		pos = 0;
-	tab_size = PmergeMe::countWord(str.c_str());
-	int			*n = new int[tab_size];
-
-	trimString(str);
-	for (int i = 0; pos != std::string::npos; i++)
-	{
-		pos = str.find_first_of(" \t\r\b\n"); 
-		int	j = 1;
-		while (pos + j < size && str[pos + j] == ' '){
-			j++;
-		}
-		if (pos != std::string::npos)
+		std::cout << "stray: ";
+		for (iterator itt = begin + (itSize * (size - 1)); itt != end; itt++)
 		{
-			s = str.substr(0, pos);
-			str.erase(0, pos + j);
+			std::cout << *itt << ", ";
 		}
-		else {
-			s = str;
-		}
-		if (parseInt(s, n[i]))
-		{
-			delete[] n;
-			return (NULL);
-		}
+		std::cout << std::endl;
 	}
-	return (n);
+
+	std::cout << std::endl;
+	sort(container, itSize * 2, maxSize);
 }
 
-int	PmergeMe::sortList(std::string str)
+template <typename Container>
+void	PmergeMe<Container>::mergeInsertionSort(Container &container)
 {
-	size_t		size;
-	int	*tab = PmergeMe::parseArg(str, size);
-	if (tab == NULL) {
-		return (1);
+	size_t	size = container.size();
+	if (size == 1) {
+		return ;
 	}
 
-	std::list<int>	list;
-
-	for (size_t i = 0; i < size; i++) {
-		list.push_back(tab[i]);
+	size_t	n = 2;
+	while (n != 1073741824)
+	{
+		if (size >= n) {
+			break ;
+		}
+		n *= 2;
 	}
-	delete[] tab;
-	return (0);
+
+	sort(container, 2, n);
 }
 
-
-int	PmergeMe::sortVector(std::string str)
-{
-	size_t		size;
-	int	*tab = PmergeMe::parseArg(str, size);
-	if (tab == NULL) {
-		return (1);
-	}
-
-	std::vector<int>	vector(size);
-
-	for (size_t i = 0; i < size; i++) {
-		vector[i] = tab[i];
-	}
-	delete[] tab;
-	return (0);
-}
+template class PmergeMe<std::vector<int> >;
+template class PmergeMe<std::deque<int> >;

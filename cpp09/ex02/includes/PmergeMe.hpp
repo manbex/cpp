@@ -4,25 +4,24 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <list>
+#include <deque>
 #include <sstream>
 #include <cctype>
 #include <algorithm>
 
+template<typename Container>
 class	PmergeMe
 {
 	public:
-		static int	sortList(std::string);
-		static int	sortVector(std::string);
+		static void	mergeInsertionSort(Container &);
 
 	private:
 		PmergeMe();
 
-		static int	parseInt(std::string const &str, int &);
-		static int	countWord(char const *);
-		static void	trimString(std::string &);
-		static int	checkOverflow(std::string const &, size_t &);
-		static int	*parseArg(std::string, size_t &);
+		typedef typename Container::iterator	iterator;
+
+		static void	sort(Container &, size_t, size_t const &);
+		static void	swapElement(iterator &, size_t &);
 };
 
 #endif
