@@ -18,16 +18,14 @@ void	PmergeMe<Container>::sort(Container &container, size_t itSize, size_t const
 {
 	size_t	size = container.size() / itSize;
 	std::cout << "size: " << size << std::endl;
-	if (size == 1) {
-		return ;
-	}
+	std::cout << "itSize: " << itSize << std::endl;
 	
 	bool	hasStray = (size % 2 != 0);
 
 	iterator	begin = container.begin();
 	iterator	end = container.end();
 
-	for (iterator it = begin; it != end; it += itSize)
+	for (iterator it = begin; it < end && it + itSize < end; it += itSize)
 	{
 		if (*(it + (itSize / 2) - 1) > *(it + itSize - 1)) {
 			swapElement(it, itSize);
@@ -38,6 +36,10 @@ void	PmergeMe<Container>::sort(Container &container, size_t itSize, size_t const
 			std::cout << *itt << ", ";
 		}
 		std::cout << std::endl;
+	}
+
+	if (size == 1) {
+		return ;
 	}
 
 	if (hasStray)
