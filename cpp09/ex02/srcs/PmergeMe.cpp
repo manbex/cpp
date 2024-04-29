@@ -20,23 +20,18 @@ void	PmergeMe<Container>::swapPair(iterator &itPair, size_t &elemSize)
 }
 
 template <typename Container>
-void	PmergeMe<Container>::insert(iterator &itElem, iterator &itPos, size_t &elemSize)
+void	PmergeMe<Container>::insert(iterator itElem, iterator itPos, size_t &elemSize)
 {
 	if (itElem == itPos) {
 		return ;
 	}
-	int	tmp[elemSize];
 
-	size_t	i = 0;
-	for (iterator it = itElem; it < itElem + elemSize; it++) {
-		tmp[i++] = *it;
-	}
-	i = 0;
-	for (iterator it = itElem + elemSize - 1; it > itPos + elemSize; it--) {
+	iterator	ite = PmergeMe::tmp->end();
+	for (iterator it = ite - 1; it >= itPos + elemSize; it--) {
 		*it = *(it - elemSize);
 	}
 	for (iterator it = itPos; it < itPos + elemSize; it++) {
-		*it = tmp[i++];
+		*it = *(itElem++);
 	}
 }
 
@@ -55,9 +50,9 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 	}
 	
 	iterator	begin = container.begin();
-	iterator	end = container.end();
+	//iterator	end = container.end();
 
-	for (iterator it = begin; it < end && it + pairSize < end; it += pairSize)
+	for (iterator it = begin; it < begin + (nbPair * pairSize); it += pairSize)
 	{
 		if (*(it + elemSize - 1) > *(it + pairSize - 1)) {
 			swapPair(it, elemSize);
@@ -86,6 +81,21 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 	std::cout << std::endl;
 	sort(container, pairSize);
 
+	std::cout << std::endl;
+	iterator	tmpBegin = PmergeMe::tmp->begin();
+	iterator	tmpEnd = PmergeMe::tmp->end();
+	iterator	tab[nbPair];
+
+	for(size_t i = 0; i < nbPair; i++)
+	{
+		PmergeMe::insert(begin + elemSize + (pairSize * i), tmpBegin + (i * elemSize), elemSize);
+		tab[i] = tmpBegin + (elemSize * i);
+	}
+
+	std::cout << "tmp: ";
+	for(iterator it = tmpBegin; it < tmpEnd; it++) {
+		std::cout << *it << " ";
+	}
 	std::cout << std::endl;
 }
 

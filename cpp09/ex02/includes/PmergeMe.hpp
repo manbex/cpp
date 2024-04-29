@@ -25,7 +25,7 @@ class	PmergeMe
 
 		static void	sort(Container &, size_t &);
 		static void	swapPair(iterator &, size_t &);
-		static void	insert(iterator &, iterator &, size_t &);
+		static void	insert(iterator, iterator, size_t &);
 };
 
 #endif
