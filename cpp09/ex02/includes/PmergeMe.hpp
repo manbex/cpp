@@ -16,12 +16,16 @@ class	PmergeMe
 		static void	mergeInsertionSort(Container &);
 
 	private:
+		static size_t		size;
+		static Container	*tmp;
+
 		PmergeMe();
 
 		typedef typename Container::iterator	iterator;
 
-		static void	sort(Container &, size_t, size_t const &);
-		static void	swapElement(iterator &, size_t &);
+		static void	sort(Container &, size_t &);
+		static void	swapPair(iterator &, size_t &);
+		static void	insert(iterator &, iterator &, size_t &);
 };
 
 #endif

@@ -1,79 +1,110 @@
 #include "PmergeMe.hpp"
 
 template <typename Container>
-void	PmergeMe<Container>::swapElement(iterator &element, size_t &itSize)
+size_t	PmergeMe<Container>::size = 0;
+
+template <typename Container>
+Container	*PmergeMe<Container>::tmp = NULL;
+
+template <typename Container>
+void	PmergeMe<Container>::swapPair(iterator &itPair, size_t &elemSize)
 {
 	int	tmp;
 
-		for (iterator it = element; it != element + (itSize / 2); it++)
+	for (iterator it = itPair; it != itPair + elemSize; it++)
 	{
 		tmp = *it;
-		*it = *(it + (itSize / 2));
-		*(it + (itSize / 2)) = tmp;
+		*it = *(it + elemSize);
+		*(it + elemSize) = tmp;
 	}
 }
 
 template <typename Container>
-void	PmergeMe<Container>::sort(Container &container, size_t itSize, size_t const &maxSize)
+void	PmergeMe<Container>::insert(iterator &itElem, iterator &itPos, size_t &elemSize)
 {
-	size_t	size = container.size() / itSize;
-	std::cout << "size: " << size << std::endl;
-	std::cout << "itSize: " << itSize << std::endl;
-	
-	bool	hasStray = (size % 2 != 0);
+	if (itElem == itPos) {
+		return ;
+	}
+	int	tmp[elemSize];
 
+	size_t	i = 0;
+	for (iterator it = itElem; it < itElem + elemSize; it++) {
+		tmp[i++] = *it;
+	}
+	i = 0;
+	for (iterator it = itElem + elemSize - 1; it > itPos + elemSize; it--) {
+		*it = *(it - elemSize);
+	}
+	for (iterator it = itPos; it < itPos + elemSize; it++) {
+		*it = tmp[i++];
+	}
+}
+
+template <typename Container>
+void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
+{
+	size_t	nbElem = PmergeMe::size / elemSize;
+	size_t	pairSize = elemSize * 2;
+	size_t	nbPair = PmergeMe::size / pairSize;
+	std::cout << "Elem: " << nbElem << std::endl;
+	std::cout << "Pair: " << nbPair << std::endl;
+	std::cout << "elemSize: " << elemSize << std::endl;
+
+	if (nbElem == 1) {
+		return ;
+	}
+	
 	iterator	begin = container.begin();
 	iterator	end = container.end();
 
-	for (iterator it = begin; it < end && it + itSize < end; it += itSize)
+	for (iterator it = begin; it < end && it + pairSize < end; it += pairSize)
 	{
-		if (*(it + (itSize / 2) - 1) > *(it + itSize - 1)) {
-			swapElement(it, itSize);
+		if (*(it + elemSize - 1) > *(it + pairSize - 1)) {
+			swapPair(it, elemSize);
 		}
-		std::cout << "element: ";
-		for (iterator itt = it; itt != it + itSize; itt++)
-		{
-			std::cout << *itt << ", ";
+		std::cout << "pair: ";
+		for (iterator itt = it; itt < it + elemSize; itt++) {
+			std::cout << *itt << " ";
+		}
+		std::cout << "+ ";
+		for (iterator itt = it + elemSize; itt < it + pairSize; itt++) {
+			std::cout << *itt << " ";
 		}
 		std::cout << std::endl;
 	}
 
-	if (size == 1) {
-		return ;
-	}
-
-	if (hasStray)
+	if (nbElem % 2 != 0)
 	{
+		iterator	it = begin + (pairSize * nbPair);
 		std::cout << "stray: ";
-		for (iterator itt = begin + (itSize * (size - 1)); itt != end; itt++)
-		{
-			std::cout << *itt << ", ";
+		for (iterator itt = it; itt < it + elemSize; itt++) {
+			std::cout << *itt << " ";
 		}
 		std::cout << std::endl;
 	}
 
 	std::cout << std::endl;
-	sort(container, itSize * 2, maxSize);
+	sort(container, pairSize);
+
+	std::cout << std::endl;
 }
 
 template <typename Container>
 void	PmergeMe<Container>::mergeInsertionSort(Container &container)
 {
-	size_t	size = container.size();
-	if (size == 1) {
+	PmergeMe::size = container.size();
+	if (PmergeMe::size < 2)
+	{
+		PmergeMe::size = 0;
 		return ;
 	}
 
-	size_t	n = 2;
-	while (n != 1073741824)
-	{
-		if (size >= n) {
-			break ;
-		}
-		n *= 2;
-	}
-
-	sort(container, 2, n);
+	PmergeMe::tmp = new Container(PmergeMe::size);
+	size_t	elemSize = 1;
+	sort(container, elemSize);
+	PmergeMe::size = 0;
+	delete PmergeMe::tmp;
+	PmergeMe::tmp = NULL;
 }
 
 template class PmergeMe<std::vector<int> >;
