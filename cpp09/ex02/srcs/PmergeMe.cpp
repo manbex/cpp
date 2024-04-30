@@ -7,6 +7,11 @@ template <typename Container>
 Container	*PmergeMe<Container>::tmp = NULL;
 
 template <typename Container>
+unsigned int const	PmergeMe<Container>::jacobsthal[27] = {
+	3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 
+	349525, 699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485, 178956971};
+
+template <typename Container>
 void	PmergeMe<Container>::swapPair(iterator &itPair, size_t &elemSize)
 {
 	int	tmp;
@@ -36,11 +41,39 @@ void	PmergeMe<Container>::insert(iterator itElem, iterator itPos, size_t &elemSi
 }
 
 template <typename Container>
+typename PmergeMe<Container>::iterator	PmergeMe<Container>::binarySearch(int const &value, iterator low, iterator high, size_t &elemSize)
+{
+	iterator	mid = low + ((std::distance<iterator>(low, high) / elemSize) / 2 * elemSize);
+
+	//std::cout << std::distance<iterator>(low, high) << std::endl;
+	//std::cout << "low: " << *low << std::endl;
+	//std::cout << "high: " << *high << std::endl;
+	//std::cout << "mid: " << *mid << std::endl;
+
+	long int	comp = value - *(mid + elemSize - 1);
+
+	if (mid == low && comp <= 0) {
+		return (low);
+	}
+	if (mid == high && comp >= 0) {
+		return (high + elemSize);
+	}
+	if (comp > 0) {
+		return (PmergeMe::binarySearch(value, mid + elemSize, high, elemSize));
+	}
+	if (comp < 0) {
+		return (PmergeMe::binarySearch(value, low, mid - elemSize, elemSize));
+	}
+	return (mid);
+}
+
+template <typename Container>
 void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 {
 	size_t	nbElem = PmergeMe::size / elemSize;
 	size_t	pairSize = elemSize * 2;
 	size_t	nbPair = PmergeMe::size / pairSize;
+	int		hasStray = (nbElem % 2 != 0) ? 1 : 0;
 	std::cout << "Elem: " << nbElem << std::endl;
 	std::cout << "Pair: " << nbPair << std::endl;
 	std::cout << "elemSize: " << elemSize << std::endl;
@@ -50,7 +83,7 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 	}
 	
 	iterator	begin = container.begin();
-	//iterator	end = container.end();
+	iterator	end = container.end();
 
 	for (iterator it = begin; it < begin + (nbPair * pairSize); it += pairSize)
 	{
@@ -68,7 +101,7 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 		std::cout << std::endl;
 	}
 
-	if (nbElem % 2 != 0)
+	if (hasStray)
 	{
 		iterator	it = begin + (pairSize * nbPair);
 		std::cout << "stray: ";
@@ -84,19 +117,92 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 	std::cout << std::endl;
 	iterator	tmpBegin = PmergeMe::tmp->begin();
 	iterator	tmpEnd = PmergeMe::tmp->end();
-	iterator	tab[nbPair];
+	iterator	tab[nbPair + hasStray];
 
+	//insert biggest value of each pair in the main chain
 	for(size_t i = 0; i < nbPair; i++)
 	{
 		PmergeMe::insert(begin + elemSize + (pairSize * i), tmpBegin + (i * elemSize), elemSize);
-		tab[i] = tmpBegin + (elemSize * i);
+		tab[i] = tmpBegin + (elemSize * i) + elemSize;
 	}
+	if (hasStray) {
+		tab[nbPair] = tab[nbPair - 1];
+	}
+
+	//insert first element in the main chain
+	PmergeMe::insert(begin, tmpBegin, elemSize);
+	
+	iterator	pend;
+	iterator	low;
+	iterator	high;
+	iterator	insertionPoint;
+	size_t		j;
+	size_t		pos = 1;
+
+	std::cout << "list: ";
+	for(iterator it = begin; it < end; it++) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+
+	for (int k = 0; k >= 0; k++)
+	{
+		j = jacobsthal[k];
+		if (nbPair + hasStray < j) {
+			j = nbPair + hasStray;
+			k = -2;
+		}
+		for (size_t diff = j; diff > pos; diff--)
+		{
+
+			std::cout << "tmp: ";
+			for(iterator it = tmpBegin; it < tmpEnd; it++) {
+				std::cout << *it << " ";
+			}
+			std::cout << std::endl;
+
+			//binary search
+			pend = begin + ((diff - 1) * pairSize);
+
+			std::cout << "pend: " << *(pend + elemSize - 1) << std::endl;
+			//std::cout << "pos: " << pos << ", diff: " << diff << std::endl;
+
+			low = tmpBegin;
+			high = tab[diff - 1];
+			high -= (hasStray) ? 0 : elemSize;
+
+			std::cout << "high = " << *high << std::endl;
+
+			insertionPoint = binarySearch(*(pend + elemSize - 1), low, high, elemSize);
+			std::cout << "point = " << *insertionPoint << std::endl;
+			
+			for (size_t i = 0; i < nbPair; i++)
+			{
+				if (tab[i] > insertionPoint) {
+					tab[i] += elemSize;
+				}
+			}
+			if (hasStray) {
+				tab[nbPair] += elemSize;
+			}
+			PmergeMe::insert(pend, insertionPoint, elemSize);
+		}
+		pos = j;
+	}
+
+
+	for (size_t i = nbElem * elemSize; begin + i < end; i++) {
+		*(tmpBegin + i) = *(begin + i);
+	}
+
 
 	std::cout << "tmp: ";
 	for(iterator it = tmpBegin; it < tmpEnd; it++) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
+	
+	container = *tmp;
 }
 
 template <typename Container>
