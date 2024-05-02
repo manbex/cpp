@@ -31,7 +31,9 @@ fclean:			clean
 
 re:				fclean all
 
-test:			all
-				@./$(NAME)
+N				= 10
 
-.PHONY:			all clean fclean re
+test:			all
+				./$(NAME) `shuf -i 1-$(N) -n $(N) | tr "\n" " "`;
+
+.PHONY:			all clean fclean re test

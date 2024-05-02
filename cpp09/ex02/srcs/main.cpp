@@ -60,99 +60,88 @@ int		parseInt(std::string const &str, int &n)
 	return (0);
 }
 
-int	countWord(char const *str)
+std::vector<int>	*initVector(int	 &size, char **(&argv))
 {
-	size_t		count = 0;
-	std::string	set = " \t\r\b\n";
+	std::vector<int>	*vector = new std::vector<int>(size - 1);
 
-	for (size_t i = 0; str[i]; i++)
+	for (int i = 1; i < size; i++)
 	{
-		if (set.find(str[i]) == std::string::npos) {
-			count++;
-		}
-		while (str[i + 1] && set.find(str[i]) == std::string::npos) {
-			i++;
-		}
-	}
-	return (count);
-}
-
-void	trimString(std::string &str)
-{
-	size_t	pos = str.find_first_not_of(" \t\r\b\n");
-
-	if (pos != std::string::npos)
-		str.erase(0, pos);
-	pos = str.find_last_not_of(" \t\r\b\n");
-	if (pos != std::string::npos && pos < str.size() - 1)
-		str.erase(pos + 1);
-}
-
-int	*parseArg(std::string str, size_t &tab_size)
-{
-	std::string	s;
-	size_t		size = str.size();
-	size_t		pos = 0;
-	tab_size = countWord(str.c_str());
-	int			*n = new int[tab_size];
-
-	trimString(str);
-	for (int i = 0; pos != std::string::npos; i++)
-	{
-		pos = str.find_first_of(" \t\r\b\n"); 
-		int	j = 1;
-		while (pos + j < size && str[pos + j] == ' '){
-			j++;
-		}
-		if (pos != std::string::npos)
+		if (parseInt(std::string(argv[i]), (*vector)[i - 1]))
 		{
-			s = str.substr(0, pos);
-			str.erase(0, pos + j);
-		}
-		else {
-			s = str;
-		}
-		if (parseInt(s, n[i]))
-		{
-			delete[] n;
+			delete vector;
 			return (NULL);
 		}
 	}
-	return (n);
+	return (vector);
 }
 
-void	print(int n)
+std::deque<int>		*initDeque(int	&size, char **(&argv))
 {
-		std::cout << n << std::endl;
+	std::deque<int>	*deque = new std::deque<int>;
+	int				n;
+
+	for (int i = 1; i < size; i++)
+	{
+		if (parseInt(std::string(argv[i]), n))
+		{
+			delete deque;
+			return (NULL);
+		}
+		deque->push_back(n);
+	}
+	return (deque);
 }
 
+void	print(std::vector<int>::iterator it, std::vector<int>::iterator ite)
+{
+	for (;it < ite; it++)
+	{
+		std::cout << *it;
+		if (it < ite - 1) {
+			std::cout << " ";
+		}
+	}
+	std::cout << std::endl;
+}
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc < 2)
 	{
-		std::cerr << "Error: the program takes exactly 1 argument" << std::endl;
+		std::cerr << "Error: no arguments" << std::endl;
 		return (1);
 	}
 
+	std::deque<int>		*deque = NULL;
+	std::vector<int>	*vector = NULL;
 	try
 	{
-		size_t	size;
-		int		*tab = parseArg(argv[1], size);
-		if (tab == NULL) {
+		deque = initDeque(argc, argv);
+		if (deque == NULL) {
 			return (1);
 		}
-		std::deque<int>		deque;
-		std::vector<int>	vector(size);
-		for (size_t i = 0; i < size; i++) {
-			deque.push_back(tab[i]);
-			vector[i] = tab[i];
+		PmergeMe<std::deque<int> >::mergeInsertionSort(*deque);
+		delete deque;
+
+		vector = initVector(argc, argv);
+		if (vector == NULL) {
+			return (1);
 		}
-		delete[] tab;
-		PmergeMe<std::deque<int> >::mergeInsertionSort(deque);
-	//	PmergeMe<std::vector<int> >::mergeInsertionSort(vector);
+
+		std::cout << "Before:	";
+		print(vector->begin(), vector->end());
+
+		PmergeMe<std::vector<int> >::mergeInsertionSort(*vector);
+
+		std::cout << "After:	";
+		print(vector->begin(), vector->end());
+
+		delete vector;
 	}
-	catch (std::exception &e) {
+	catch (std::exception &e)
+	{
+		delete vector;
+		delete deque;
 		std::cout << e.what() << std::endl;
 	}
 	return (0);
