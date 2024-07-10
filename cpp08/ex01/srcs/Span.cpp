@@ -1,7 +1,9 @@
 #include "Span.hpp"
 
 Span::Span(unsigned int const &size): _size(size)
-{}
+{
+	std::cout << "creating Span of size " << size << std::endl;
+}
 
 Span::Span(Span const &cpy): _size(cpy._size)
 {
@@ -11,25 +13,30 @@ Span::Span(Span const &cpy): _size(cpy._size)
 Span	&Span::operator=(Span const &cpy)
 {
 	this->_content.assign(cpy._content.begin(), cpy._content.end());
-	if (this->_content.size() > this->_size)
+	if (this->_content.size() > this->_size) {
 		this->_content.resize(this->_size);
+	}
 	return (*this);
 }
 
 Span::~Span()
-{
-}
+{}
 
 void			Span::addNumber(int const &value)
 {
-	if (this->_content.size() >= this->_size)
+	if (this->_content.size() >= this->_size) {
 		throw Span::SpanFullException();
+	}
+	std::cout << "adding number " << value << std::endl;
 	this->_content.push_back(value);
 }
 
-void			Span::fill(int const &value)
+void			Span::addNumber(std::list<int>::const_iterator begin, std::list<int>::const_iterator end)
 {
-	this->_content.resize(this->_size, value);
+	this->_content.insert(this->_content.end(), begin, end);
+	if (this->_content.size() >= this->_size) {
+		this->_content.resize(this->_size);
+	}
 }
 
 static int		diff(int const &n1, int const &n2)
@@ -40,8 +47,9 @@ static int		diff(int const &n1, int const &n2)
 
 unsigned int	Span::shortestSpan() const
 {
-	if (this->_content.size() < 2)
+	if (this->_content.size() < 2) {
 		throw Span::NotEnoughElementsException();
+	}
 
 	std::list<int>::const_iterator	it1 = this->_content.begin();
 	std::list<int>::const_iterator	ite = this->_content.end();
@@ -52,14 +60,17 @@ unsigned int	Span::shortestSpan() const
 	{
 		for (it2 = it1; it2 != ite; it2++)
 		{
-			if (it2 == it1)
+			if (it2 == it1) {
 				it2++;
-			if (it2 == ite)
+			}
+			if (it2 == ite) {
 				break ;
+			}
 			int tmp = diff(*it1, *it2);
 			res = tmp < res ? tmp : res;
-			if (res == 0)
+			if (res == 0) {
 				return (res);
+			}
 		}
 	}
 	return (res);
@@ -67,8 +78,9 @@ unsigned int	Span::shortestSpan() const
 
 unsigned int	Span::longestSpan() const
 {
-	if (this->_content.size() < 2)
+	if (this->_content.size() < 2) {
 		throw Span::NotEnoughElementsException();
+	}
 
 	std::list<int>::const_iterator min;
 	std::list<int>::const_iterator max;

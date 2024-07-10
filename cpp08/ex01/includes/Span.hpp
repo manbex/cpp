@@ -16,10 +16,10 @@ class	Span
 		~Span();
 
 		void			addNumber(int const &);
+		void			addNumber(std::list<int>::const_iterator, std::list<int>::const_iterator);
 		unsigned int	shortestSpan() const;
 		unsigned int	longestSpan() const;
 		void			print() const;
-		void			fill(int const &value);
 
 		class			SpanFullException;
 		class			NotEnoughElementsException;
