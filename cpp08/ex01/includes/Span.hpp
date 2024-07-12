@@ -2,10 +2,11 @@
 # define SPAN_HPP
 
 #include <iostream>
-#include <list>
 #include <algorithm>
 #include <utility>
 #include <limits>
+#include <list>
+#include <vector>
 
 class	Span
 {
@@ -16,11 +17,14 @@ class	Span
 		~Span();
 
 		void			addNumber(int const &);
-		void			addNumber(std::list<int>::const_iterator, std::list<int>::const_iterator);
+		void			fill(int const &value);
 		unsigned int	shortestSpan() const;
 		unsigned int	longestSpan() const;
 		void			print() const;
 
+		template <typename Iterator>
+		void addNumber(Iterator begin, Iterator end);
+	
 		class			SpanFullException;
 		class			NotEnoughElementsException;
 
@@ -48,5 +52,14 @@ class			Span::NotEnoughElementsException: public std::exception
 			return ("Not enough elements");
 		}
 };
+
+template <typename Iterator>
+void			Span::addNumber(Iterator begin, Iterator end)
+{
+	this->_content.insert(this->_content.end(), begin, end);
+	if (this->_content.size() >= this->_size) {
+		this->_content.resize(this->_size);
+	}
+}
 
 #endif

@@ -9,7 +9,7 @@ int	main()
 		std::cout << span.shortestSpan() << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -23,7 +23,7 @@ int	main()
 		span.addNumber(6);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -33,14 +33,14 @@ int	main()
 		std::cout << "longest span: " << span.longestSpan() << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Exception: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
-	std::list<int>	list(10000, 69);
-	list.push_back(-351);
-	Span	span2(list.size());
-	span2.addNumber(list.begin(), list.end());
+	std::vector<int>	tmp(10000, 15);
+	tmp.push_back(-405);
+	Span	span2(tmp.size());
+	span2.addNumber(tmp.begin(), tmp.end());
 	std::cout << std::endl;
 
 	try
@@ -49,7 +49,7 @@ int	main()
 		std::cout << "longest span: " << span2.longestSpan() << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "Exception: " << e.what() << std::endl;
 	}
 	return (0);
 }

@@ -31,11 +31,12 @@ void			Span::addNumber(int const &value)
 	this->_content.push_back(value);
 }
 
-void			Span::addNumber(std::list<int>::const_iterator begin, std::list<int>::const_iterator end)
+void			Span::fill(int const &value)
 {
-	this->_content.insert(this->_content.end(), begin, end);
-	if (this->_content.size() >= this->_size) {
-		this->_content.resize(this->_size);
+	std::cout << "filling span with number " << value << std::endl;
+	size_t	size = this->_content.size();
+	while (size < this->_size) {
+		this->_content.push_back(value);
 	}
 }
 
