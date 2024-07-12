@@ -185,7 +185,7 @@ void		BitcoinExchange::parseInput(std::string const &str)
 			break ;
 		}
 	}
-	std::cout << ite->first << " => " << tmp2 << " = " << d * ite->second << std::endl;
+	std::cout << tmp1 << " => " << tmp2 << " = " << d * ite->second << std::endl;
 }
 
 int			BitcoinExchange::checkInput(char const *filename)
@@ -202,6 +202,5 @@ int			BitcoinExchange::checkInput(char const *filename)
 	while (getline(file, buf)){
 		BitcoinExchange::parseInput(buf);
 	}
-	file.close();
 	return (0);
 }
