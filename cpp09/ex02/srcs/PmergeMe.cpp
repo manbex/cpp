@@ -69,7 +69,7 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 	size_t	nbPair = PmergeMe::size / pairSize;
 	int		hasStray = (nbElem % 2 != 0) ? 1 : 0;
 
-	// if there is only 1 element, we can't make a pair so we return
+	// if there is only 1 element, return
 	if (nbElem == 1) {
 		return ;
 	}
@@ -85,7 +85,7 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 		}
 	}
 
-	// call my function recursively
+	// call the function recursively
 	sort(container, pairSize);
 
 	iterator	tmpBegin = PmergeMe::tmp->begin();

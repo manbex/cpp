@@ -31,7 +31,7 @@ fclean:			clean
 
 re:				fclean all
 
-N				= 10
+N				= 3000
 
 test:			all
 				./$(NAME) `shuf -i 1-$(N) -n $(N) | tr "\n" " "`;

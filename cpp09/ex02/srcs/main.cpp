@@ -116,6 +116,7 @@ int	main(int argc, char **argv)
 	std::vector<int>	*vector = NULL;
 	try
 	{
+		// test deque
 		deque = initDeque(argc, argv);
 		if (deque == NULL) {
 			return (1);
@@ -123,6 +124,7 @@ int	main(int argc, char **argv)
 		PmergeMe<std::deque<int> >::mergeInsertionSort(*deque);
 		delete deque;
 
+		//test vector
 		vector = initVector(argc, argv);
 		if (vector == NULL) {
 			return (1);
