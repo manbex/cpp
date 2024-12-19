@@ -6,7 +6,6 @@ int	main(int argc, char **argv)
 		std::cout << "btc: program must take exactly 1 argument" << std::endl;
 		return (1);
 	}
-	static_cast<void>(argv);
 	try {
 		if (BitcoinExchange::loadDatabase("data.csv")){
 			return (1);
