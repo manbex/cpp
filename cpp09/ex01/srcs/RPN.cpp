@@ -48,6 +48,11 @@ void	RPN::operate(char const &c, std::stack<long int, std::list<long int> > &sta
 	stack.push(res);
 }
 
+static long int	charToInt(char const c)
+{
+	return (c - '0');
+}
+
 void	RPN::calculate(std::string str)
 {
 	std::stack<long int, std::list<long int> >	stack;
@@ -69,7 +74,7 @@ void	RPN::calculate(std::string str)
 			throw (RPN::badArgException());
 		}
 		if (isInSet(s[0], "0123456789")) {
-			stack.push(static_cast<long int>(s[0] - '0'));
+			stack.push(charToInt(s[0]));
 		}
 		else {
 			RPN::operate(s[0], stack);
