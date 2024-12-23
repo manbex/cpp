@@ -8,6 +8,7 @@
 #include <sstream>
 #include <cctype>
 #include <algorithm>
+#include <sys/time.h>
 
 template<typename Container>
 class	PmergeMe

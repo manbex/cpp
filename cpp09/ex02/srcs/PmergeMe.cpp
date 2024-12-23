@@ -11,6 +11,7 @@ unsigned int const	PmergeMe<Container>::jacobsthal[27] = {
 	3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 
 	349525, 699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485, 178956971};
 
+
 template <typename Container>
 void	PmergeMe<Container>::swapPair(iterator &itPair, size_t &elemSize)
 {
@@ -91,7 +92,7 @@ void	PmergeMe<Container>::sort(Container &container, size_t &elemSize)
 	iterator	tmpBegin = PmergeMe::tmp->begin();
 	iterator	tab[nbPair + hasStray];
 
-	//insert biggest value of each pair in the main chain
+	//insert biggest element of each pair in the main chain
 	for(size_t i = 0; i < nbPair; i++)
 	{
 		PmergeMe::insert(begin + elemSize + (pairSize * i), tmpBegin + (i * elemSize), elemSize);

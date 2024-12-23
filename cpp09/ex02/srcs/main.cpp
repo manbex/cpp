@@ -114,36 +114,53 @@ int	main(int argc, char **argv)
 
 	std::deque<int>		*deque = NULL;
 	std::vector<int>	*vector = NULL;
+	std::vector<int>	*input = NULL;
+	struct timeval		start1, start2, stop1, stop2;
+
 	try
 	{
 		// test deque
+		gettimeofday(&start1, NULL);
 		deque = initDeque(argc, argv);
 		if (deque == NULL) {
 			return (1);
 		}
 		PmergeMe<std::deque<int> >::mergeInsertionSort(*deque);
-		delete deque;
+		gettimeofday(&stop1, NULL);
 
 		//test vector
+		gettimeofday(&start2, NULL);
 		vector = initVector(argc, argv);
 		if (vector == NULL) {
 			return (1);
 		}
-
-		std::cout << "Before:	";
-		print(vector->begin(), vector->end());
-
 		PmergeMe<std::vector<int> >::mergeInsertionSort(*vector);
+		gettimeofday(&stop2, NULL);
 
+		input = initVector(argc, argv);
+		if (input == NULL) {
+			return (1);
+		}
+		std::cout << "Before:	";
+		print(input->begin(), input->end());
 		std::cout << "After:	";
 		print(vector->begin(), vector->end());
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque: ";
+		std::cout << (stop1.tv_sec - start1.tv_sec) * 1000000 + stop1.tv_usec - start1.tv_usec;
+		std::cout << " us" << std::endl;
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector: ";
+		std::cout << (stop2.tv_sec - start2.tv_sec) * 1000000 + stop2.tv_usec - start2.tv_usec;
+		std::cout << " us" << std::endl;
 
+		delete deque;
 		delete vector;
+		delete input;
 	}
 	catch (std::exception &e)
 	{
 		delete vector;
 		delete deque;
+		delete input;
 		std::cout << e.what() << std::endl;
 	}
 	return (0);
